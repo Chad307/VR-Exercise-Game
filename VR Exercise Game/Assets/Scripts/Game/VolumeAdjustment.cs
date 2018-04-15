@@ -44,9 +44,9 @@ namespace Game
         private ReferenceManager reference;
 
         /// <summary>
-        /// Reference to optionsValues.
+        /// Reference to SettingsValues.
         /// </summary>
-        private OptionsValues optionsValues;
+        private SettingsValues settingsValues;
 
         [Tooltip("The base volume for this audio source. Used to prioritize sources in the same category")]
         [Range(0.0f, 1.0f)]
@@ -59,7 +59,7 @@ namespace Game
         {
             audioSource = gameObject.GetComponent<AudioSource>();
             reference = FindObjectOfType<ReferenceManager>();
-            optionsValues = reference.optionsValues;
+            settingsValues = reference.settingsValues;
 
             UpdateVolume();
         }
@@ -69,21 +69,21 @@ namespace Game
         /// </summary>
         public void UpdateVolume()
         {
-            switch (category)
-            {
-                case AudioSourceCategory.Music:
-                    audioSource.volume = baseVolume * optionsValues.musicVolume;
-                    break;
-                case AudioSourceCategory.FX:
-                    audioSource.volume = baseVolume * optionsValues.fxVolume;
-                    break;
-                case AudioSourceCategory.Dialogue:
-                    audioSource.volume = baseVolume * optionsValues.dialogueVolume;
-                    break;
-                default:
-                    Debug.Log("Audio category not recognized on " + gameObject.name);
-                    break;
-            }
+            //switch (category)
+            //{
+            //    case AudioSourceCategory.Music:
+            //        audioSource.volume = baseVolume * optionsValues.musicVolume;
+            //        break;
+            //    case AudioSourceCategory.FX:
+            //        audioSource.volume = baseVolume * optionsValues.fxVolume;
+            //        break;
+            //    case AudioSourceCategory.Dialogue:
+            //        audioSource.volume = baseVolume * optionsValues.dialogueVolume;
+            //        break;
+            //    default:
+            //        Debug.Log("Audio category not recognized on " + gameObject.name);
+            //        break;
+            //}
         }
     }
 }

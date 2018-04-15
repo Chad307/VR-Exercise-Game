@@ -1,37 +1,36 @@
 ﻿
 using UnityEngine;
+using Menus;
 
 namespace Game
 {
     public class ReferenceManager : MonoBehaviour
     {
-        [Header("Systems and Managers")]
-        public GameSettings gameSettings;
+        [Header("Game")]
+        public GameValues gameValues;
 
+        [Header("Environment")]
+        public GameObject environmentGO;
 
-
-        [Header("Options")]
-        public OptionsValues optionsValues;
-
+        [Header("Settings")]
+        public SettingsValues settingsValues;
         public ColorBlindMode colorBlindMode;
 
-
-        [Header("Shared Sound Effects")]
+        [Header("Audio")]
+        public AudioSource mainCanvasAudioSource;
         public AudioClip menuSelect;
-
         public AudioClip menuBack;
-
         public AudioClip uiHover;
 
-
         [Header("Player")]
-        public GameObject player;
-
+        public GameObject playerGO;
+        public GameObject cameraGO;
 
         [Header("Menus and UI")]
-        public GameObject mainMenu;
-
-
-
+        public MenuTransitionManager menuTransitionManager;
+        public GameObject mainCanvasGO;
+        public GameObject mainMenuGO;
+        public GameObject settingsMenuGO;
+        public GameObject startMenuGO;
     }
 }

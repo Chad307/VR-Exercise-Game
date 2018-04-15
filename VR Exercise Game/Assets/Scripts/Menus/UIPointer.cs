@@ -164,7 +164,7 @@ namespace Menus
                 }
 
                 else if (Physics.Raycast(transform.position, transform.forward,
-                        out hit, Mathf.Infinity, LayerMask.GetMask("Environment")))
+                        out hit, Mathf.Infinity, LayerMask.GetMask("UI")))
                 {
                     if (hit.collider.gameObject.CompareTag("InteractableUI"))
                     {

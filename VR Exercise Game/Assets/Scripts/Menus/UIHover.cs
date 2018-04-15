@@ -23,6 +23,9 @@ namespace Menus
     /// </summary>
     public class UIHover : MonoBehaviour
     {
+        /// <summary>
+        /// Reference to ReferenceManager;
+        /// </summary>
         private ReferenceManager reference;
 
         /// <summary>
@@ -33,7 +36,7 @@ namespace Menus
         /// <summary>
         /// Reference to audio source.
         /// </summary>
-        public AudioSource source;
+        public AudioSource audioSource;
 
         /// <summary>
         /// State of whether UI is being hovered over.
@@ -45,6 +48,9 @@ namespace Menus
         /// </summary>
         private bool isSelected = false;
 
+        /// <summary>
+        /// Find reference.
+        /// </summary>
         private void Awake()
         {
             reference = FindObjectOfType<ReferenceManager>();
@@ -67,7 +73,7 @@ namespace Menus
             {
                 isHovering = true;
                 activeSpriteImageGO.SetActive(true);
-                source.PlayOneShot(reference.uiHover);
+                audioSource.PlayOneShot(reference.uiHover);
             }
         }
 

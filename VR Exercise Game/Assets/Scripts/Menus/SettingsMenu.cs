@@ -6,7 +6,7 @@
 // CPSC-340-01 & CPSC-344-01
 // Group Project
 //
-// DisplayMenu controls interactions with the Display Menu.
+// SettingsMenu controls interactions with the Settings Menu.
 //
 //=============================================================================
 
@@ -20,12 +20,12 @@ namespace Menus
     /// <summary>
     /// Controls interactions with Display Menu.
     /// </summary>
-    public class DisplayMenu : MonoBehaviour
+    public class SettingsMenu : MonoBehaviour
     {
         /// <summary>
         /// Reference to Menu Transition Manager.
         /// </summary>
-        public MenuTransitionManager transitionManager;
+        private MenuTransitionManager menuTransitionManager;
 
         /// <summary>
         /// Reference to menu to go to when back is pressed.
@@ -35,12 +35,12 @@ namespace Menus
         /// <summary>
         /// Reference to Menu Audio source.
         /// </summary>
-		public AudioSource source;
+		private AudioSource source;
 
         /// <summary>
-        /// Reference to Bloom Toggle.
+        /// Reference to volume slider.
         /// </summary>
-        public Toggle bloomToggle;
+        public Slider volumeSlider;
 
         /// <summary>
         /// Reference to Color Blind Mode Toggle.
@@ -63,29 +63,26 @@ namespace Menus
         public ColorBlindModeButton[] colorBlindModeButtons;
 
         /// <summary>
-        /// Reference to Reference Manager.
+        /// Reference to ReferenceManager.
         /// </summary>
         private ReferenceManager reference;
 
         /// <summary>
-        /// Variables used to make sure that audio
-        /// doesn't play over itself
+        /// Reference to SettingsValues.
         /// </summary>
-        private int backCounter = 0;
-
-        private int bloomCounter = 0;
-
-        private int colorBlindModeCounter = 0;
+        private SettingsValues settingsValues;
 
         /// <summary>
-        /// Find references. 
+        /// Find references. Get initial values for settings.
         /// </summary>
         private void Awake()
         {
             reference = FindObjectOfType<ReferenceManager>();
-            bloomToggle.isOn = reference.optionsValues.bloom;
+            menuTransitionManager = reference.menuTransitionManager;
+            source = reference.mainCanvasAudioSource;
+            settingsValues = reference.settingsValues;
 
-            if (reference.optionsValues.colorBlindMode == ColorBlindMode.Mode.Standard)
+            if (settingsValues.colorBlindMode == ColorBlindMode.Mode.Standard)
             {
                 colorBlindModeToggle.isOn = false;
                 foreach (ColorBlindModeButton button in colorBlindModeButtons)
@@ -99,37 +96,38 @@ namespace Menus
                 foreach (ColorBlindModeButton button in colorBlindModeButtons)
                 {
                     button.buttonGO.SetActive(true);
-                    if (button.mode == reference.optionsValues.colorBlindMode)
+                    if (button.mode == settingsValues.colorBlindMode)
                     {
                         button.buttonGO.GetComponent<UIHover>().Select();
                     }
                 }
             }
+
+            volumeSlider.value = settingsValues.masterVolume;
         }
 
         /// <summary>
-        /// Back button pressed. Navigate to Options Menu.
+        /// Back button pressed. Navigate to Main Menu.
         /// </summary>
         public void PressBack()
         {
-            source.PlayOneShot(reference.menuSelect);
-            reference.optionsValues.SetDisplayPlayerPrefs();
-            transitionManager.Transition(backMenuGO);
+            source.PlayOneShot(reference.menuBack);
+            settingsValues.SetPlayerPrefs();
+            menuTransitionManager.Transition(backMenuGO);
         }
 
         /// <summary>
-        /// Change bloom setting based on bloomToggle value.
+        /// Change AudioListener volume based on masterVolumeSlider value.
         /// </summary>
-        public void SetBloom(bool isOn)
+        public void AdjustMasterVolume(float value)
         {
-            source.PlayOneShot(reference.menuSelect);
-            reference.optionsValues.SetBloom(isOn);
+            reference.settingsValues.SetMasterVolume(value);
         }
 
         /// <summary>
         /// Toggle whether color blind mode is active (using a non-standard mode).
         /// </summary>
-        /// <param name="isOn"></param>
+        /// <param name="isOn">State of whether colorblind mode is standard.</param>
         public void ToggleColorBlindMode(bool isOn)
         {
             if (isOn)
@@ -150,7 +148,7 @@ namespace Menus
                     button.buttonGO.GetComponent<UIHover>().EndSelect();
                 }
 
-                reference.optionsValues.SetColorBlindMode(ColorBlindMode.Mode.Standard);
+                settingsValues.SetColorBlindMode(ColorBlindMode.Mode.Standard);
             }
         }
 
@@ -167,7 +165,7 @@ namespace Menus
                 if (button.buttonGO == buttonGO)
                 {
                     button.buttonGO.GetComponent<UIHover>().Select();
-                    reference.optionsValues.SetColorBlindMode(button.mode);
+                    settingsValues.SetColorBlindMode(button.mode);
                 }
                 else
                 {

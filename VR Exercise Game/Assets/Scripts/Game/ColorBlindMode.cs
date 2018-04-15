@@ -23,9 +23,14 @@ namespace Game
     public class ColorBlindMode : MonoBehaviour
     {
         /// <summary>
+        /// Reference to ReferenceManager;
+        /// </summary>
+        private ReferenceManager reference;
+
+        /// <summary>
         /// Reference to player camera game object.
         /// </summary>
-        public GameObject cameraGO;
+        private GameObject cameraGO;
 
         /// <summary>
         /// Enum for different named color blind modes. 
@@ -57,6 +62,15 @@ namespace Game
         /// Collection of mode data.
         /// </summary>
         public ModeData[] modes;
+
+        /// <summary>
+        /// Find references.
+        /// </summary>
+        private void Awake()
+        {
+            reference = FindObjectOfType<ReferenceManager>();
+            cameraGO = reference.cameraGO;
+        }
 
         /// <summary>
         /// Apply channel mixer values based on specified mode.
