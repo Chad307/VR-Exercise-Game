@@ -13,6 +13,8 @@ namespace Game
 
         [Header("Environment")]
         public GameObject environmentGO;
+        public Material defaultSkybox;
+        public Material spaceSkybox;
 
         [Header("Settings")]
         public SettingsValues settingsValues;

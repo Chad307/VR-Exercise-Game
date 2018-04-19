@@ -59,7 +59,15 @@ namespace Game
         public void SetEnvironmentOn(bool environmentOn)
         {
             this.environmentOn = environmentOn;
-            environmentGO.SetActive(environmentOn);
+            //environmentGO.SetActive(environmentOn);
+            if (environmentOn)
+            {
+                RenderSettings.skybox = reference.spaceSkybox;
+            }
+            else
+            {
+                RenderSettings.skybox = reference.defaultSkybox;
+            }
         }
 
         /// <summary>
