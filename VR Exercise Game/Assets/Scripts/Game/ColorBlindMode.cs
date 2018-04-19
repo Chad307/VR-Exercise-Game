@@ -25,12 +25,7 @@ namespace Game
         /// <summary>
         /// Reference to ReferenceManager;
         /// </summary>
-        private ReferenceManager reference;
-
-        /// <summary>
-        /// Reference to player camera game object.
-        /// </summary>
-        private GameObject cameraGO;
+        public ReferenceManager reference;
 
         /// <summary>
         /// Enum for different named color blind modes. 
@@ -68,8 +63,7 @@ namespace Game
         /// </summary>
         private void Awake()
         {
-            reference = FindObjectOfType<ReferenceManager>();
-            cameraGO = reference.cameraGO;
+            //reference = FindObjectOfType<ReferenceManager>();
         }
 
         /// <summary>
@@ -78,17 +72,19 @@ namespace Game
         /// <param name="mode">Mode to get new values from.</param>
         public void SetMode(Mode mode)
         {
-            cameraGO.GetComponent<PostProcessingBehaviour>().profile.colorGrading.enabled = true;
+            reference.cameraGO.GetComponent<PostProcessingBehaviour>().profile.colorGrading.enabled = true;
 
             foreach (ModeData modeData in modes)
             {
                 if (modeData.mode == mode)
                 {
-                    ColorGradingModel.Settings cgms = cameraGO.GetComponent<PostProcessingBehaviour>().profile.colorGrading.settings;
+                    ColorGradingModel.Settings cgms = reference.cameraGO.
+                        GetComponent<PostProcessingBehaviour>().profile.colorGrading.settings;
                     cgms.channelMixer.red = modeData.redChannel;
                     cgms.channelMixer.green = modeData.greenChannel;
                     cgms.channelMixer.blue = modeData.blueChannel;
-                    cameraGO.GetComponent<PostProcessingBehaviour>().profile.colorGrading.settings = cgms;
+                    reference.cameraGO.GetComponent<PostProcessingBehaviour>()
+                        .profile.colorGrading.settings = cgms;
                     break;
                 }
             }

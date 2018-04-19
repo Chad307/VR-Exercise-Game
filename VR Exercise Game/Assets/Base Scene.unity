@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2124,7 +2124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &552961006
 Transform:
   m_ObjectHideFlags: 0
@@ -3677,6 +3677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameValues: {fileID: 1085257977}
+  spawner: {fileID: 552961007}
   environmentGO: {fileID: 950436647}
   settingsValues: {fileID: 712524388}
   colorBlindMode: {fileID: 1375340060}
@@ -3686,6 +3687,9 @@ MonoBehaviour:
   uiHover: {fileID: 8300000, guid: e9befd794befe7540ad040be41dba757, type: 3}
   playerGO: {fileID: 1348744726}
   cameraGO: {fileID: 502293498}
+  hands:
+  - {fileID: 1348744729}
+  - {fileID: 1348744728}
   menuTransitionManager: {fileID: 1174798394}
   mainCanvasGO: {fileID: 1772923104}
   mainMenuGO: {fileID: 947979726}
@@ -4526,6 +4530,18 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 476540, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
   m_PrefabInternal: {fileID: 1348744725}
+--- !u!114 &1348744728 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11401046, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1348744725}
+  m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
+--- !u!114 &1348744729 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11450312, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1348744725}
+  m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
 --- !u!1 &1362364628
 GameObject:
   m_ObjectHideFlags: 0
@@ -4671,6 +4687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f546255e010f2974c9d5ed8ff5a11342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reference: {fileID: 1031899461}
   modes:
   - mode: 0
     redChannel: {x: 1, y: 0, z: 0}
@@ -4710,7 +4727,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1383249598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9, y: -1.15, z: -7.68}
+  m_LocalPosition: {x: 0.9, y: -0.563, z: -7.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 552961006}

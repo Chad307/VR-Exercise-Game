@@ -12,6 +12,7 @@
 //=============================================================================
 
 using UnityEngine;
+using Game;
 
 namespace Menus
 {
@@ -26,6 +27,25 @@ namespace Menus
         public GameObject currMenu;
 
         /// <summary>
+        /// Reference to ReferenceManager;
+        /// </summary>
+        private ReferenceManager reference;
+
+        /// <summary>
+        /// Reference to main menu gameobject.
+        /// </summary>
+        private GameObject mainMenuGO;
+
+        /// <summary>
+        /// Find references.
+        /// </summary>
+        private void Awake()
+        {
+            reference = FindObjectOfType<ReferenceManager>();
+            mainMenuGO = reference.mainMenuGO;
+        }
+
+        /// <summary>
         /// Deactivate current menu and activate next menu. Save next menu as current menu.
         /// </summary>
         /// <param name="nextMenu"></param>
@@ -34,6 +54,15 @@ namespace Menus
             currMenu.SetActive(false);
             nextMenu.SetActive(true);
             currMenu = nextMenu;
+        }
+
+        /// <summary>
+        /// Transition to Main Menu. Meant to be called when gameplay ends.
+        /// </summary>
+        public void GoToMain()
+        {
+            mainMenuGO.SetActive(true);
+            currMenu = mainMenuGO;
         }
     }
 }

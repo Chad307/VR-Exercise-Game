@@ -17,7 +17,6 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
 namespace Game
 {
@@ -112,6 +111,7 @@ namespace Game
         /// </summary>
         private void SetAwakeValues()
         {
+            SetMasterVolume(masterVolume);
             SetColorBlindMode(colorBlindMode);
         }
     }

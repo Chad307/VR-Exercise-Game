@@ -15,6 +15,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using Game;
 using Valve.VR.InteractionSystem;
 
 namespace Menus
@@ -93,17 +94,7 @@ namespace Menus
         private bool initialized = false;
 
         /// <summary>
-        /// Reference to Menus gameobject.
-        /// </summary>
-        private GameObject menus;
-
-        /// <summary>
-        /// State of whether menus are toggled on.
-        /// </summary>
-        private bool menusOn = true;
-
-        /// <summary>
-        /// Find references, initialize pointer and pointer values.
+        /// Find hand, initialize pointer and pointer values.
         /// </summary>
         private void OnEnable()
         {
@@ -125,11 +116,6 @@ namespace Menus
                 if (!initialized)
                 {
                     Initialize();
-                }
-
-                if (hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
-                {
-                    ToggleMenus();
                 }
 
                 RaycastHit hit;
@@ -316,8 +302,6 @@ namespace Menus
             pointer.endWidth = thickness;
             steamVRLaserPointer.enabled = true;
 
-            menus = GameObject.Find("Menus");
-
             initialized = true;
         }
 
@@ -339,15 +323,6 @@ namespace Menus
                 
                 lastInteractableAimObject = null;
             }
-        }
-
-        /// <summary>
-        /// Toggle visibility of menus using Vive Menu button.
-        /// </summary>
-        private void ToggleMenus()
-        {
-            menusOn = !menusOn;
-            menus.SetActive(menusOn);
         }
     }
 }

@@ -28,6 +28,11 @@ namespace Menus
         private ReferenceManager reference;
 
         /// <summary>
+        /// Reference to Spawner.
+        /// </summary>
+        private Spawner spawner;
+
+        /// <summary>
         /// Reference to GameValues;
         /// </summary>
         private GameValues gameValues;
@@ -73,6 +78,7 @@ namespace Menus
         private void Awake()
         {
             reference = FindObjectOfType<ReferenceManager>();
+            spawner = reference.spawner;
             gameValues = reference.gameValues;
             environmentGO = reference.environmentGO;
             menuTransitionManager = reference.menuTransitionManager;
@@ -123,7 +129,7 @@ namespace Menus
         {
             source.PlayOneShot(reference.menuSelect);
             PlayerPrefs.SetInt("environmentOn", Convert.ToInt32(environmentGO.activeSelf));
-            //TODO
+            spawner.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
 

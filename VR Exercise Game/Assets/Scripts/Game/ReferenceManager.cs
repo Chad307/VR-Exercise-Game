@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using Menus;
+using Valve.VR.InteractionSystem;
 
 namespace Game
 {
@@ -8,6 +9,7 @@ namespace Game
     {
         [Header("Game")]
         public GameValues gameValues;
+        public Spawner spawner;
 
         [Header("Environment")]
         public GameObject environmentGO;
@@ -25,6 +27,7 @@ namespace Game
         [Header("Player")]
         public GameObject playerGO;
         public GameObject cameraGO;
+        public Hand[] hands;
 
         [Header("Menus and UI")]
         public MenuTransitionManager menuTransitionManager;
