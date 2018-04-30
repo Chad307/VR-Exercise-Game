@@ -129,7 +129,17 @@ namespace Menus
         {
             source.PlayOneShot(reference.menuSelect);
             PlayerPrefs.SetInt("environmentOn", Convert.ToInt32(environmentGO.activeSelf));
-            spawner.gameObject.SetActive(true);
+
+            if (reference.tutorial.gameObject.activeSelf)
+            {
+                reference.tutorial.SwitchStages(Tutorial.TutorialStage.Gameplay);
+                reference.tutorial.ShowInStage();
+            }
+            else
+            {
+                spawner.gameObject.SetActive(true);
+            }
+
             gameObject.SetActive(false);
         }
 

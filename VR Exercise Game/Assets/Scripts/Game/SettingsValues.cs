@@ -50,6 +50,10 @@ namespace Game
         /// </summary>
         public ColorBlindMode.Mode defaultColorBlindMode;
 
+        public bool tutorialOn;
+
+        public bool defaultTutorialOn;
+
         [Header("References")]
         /// <summary>
         /// Reference to ReferenceManager.
@@ -87,6 +91,11 @@ namespace Game
             reference.colorBlindMode.SetMode(colorBlindMode);
         }
 
+        public void SetTutorialOn(bool tutorialOn)
+        {
+            this.tutorialOn = tutorialOn;
+        }
+
         /// <summary>
         /// Set all player prefs.
         /// </summary>
@@ -94,6 +103,7 @@ namespace Game
         {
             PlayerPrefs.SetFloat("masterVolume", masterVolume);
             PlayerPrefs.SetInt("colorBlindMode", Convert.ToInt32(colorBlindMode));
+            PlayerPrefs.SetInt("tutorialOn", Convert.ToInt32(tutorialOn));
         }
 
         /// <summary>
@@ -104,6 +114,8 @@ namespace Game
             masterVolume = PlayerPrefs.GetFloat("masterVolume", defaultMasterVolume);
             colorBlindMode = (ColorBlindMode.Mode)PlayerPrefs.GetInt("colorBlindMode", 
                 Convert.ToInt32(defaultColorBlindMode));
+            tutorialOn = Convert.ToBoolean(PlayerPrefs.GetInt("tutorialOn", 
+                Convert.ToInt32(defaultTutorialOn)));
         }
 
         /// <summary>
@@ -113,6 +125,7 @@ namespace Game
         {
             SetMasterVolume(masterVolume);
             SetColorBlindMode(colorBlindMode);
+            reference.tutorial.gameObject.SetActive(tutorialOn);
         }
     }
 }

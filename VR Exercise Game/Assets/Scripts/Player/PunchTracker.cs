@@ -7,15 +7,11 @@ namespace Player
 {
     public class PunchTracker : MonoBehaviour
     {
-        //SteamVR_TrackedObject trackedObject;
-
-        //SteamVR_TrackedController trackedController;
-
         public Hand hand;
 
         public float forceMultipler;
 
-        //SteamVR_Controller.Device device;
+        public float minimumHandVelocity = 0.8f;
 
         // Use this for initialization
         void Awake()
@@ -26,7 +22,8 @@ namespace Player
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("projectile") && other.GetComponent<Move>().isPunchable)
+            if (other.CompareTag("projectile") && other.GetComponent<Move>().isPunchable
+                && hand.GetTrackedObjectVelocity().sqrMagnitude >= minimumHandVelocity)
             {
                 other.GetComponent<Move>().StartDetonation(false);
                 Rigidbody projectileRigidbody = other.GetComponent<Rigidbody>();
@@ -34,6 +31,7 @@ namespace Player
                 projectileRigidbody.angularVelocity = hand.GetTrackedObjectAngularVelocity() * forceMultipler;
                 projectileRigidbody.maxAngularVelocity = projectileRigidbody
                     .angularVelocity.magnitude;
+                Debug.Log(hand.GetTrackedObjectVelocity().sqrMagnitude);
             }
         }
     }

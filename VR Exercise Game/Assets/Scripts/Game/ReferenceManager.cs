@@ -39,5 +39,8 @@ namespace Game
         public GameObject mainMenuGO;
         public GameObject settingsMenuGO;
         public GameObject startMenuGO;
+
+        [Header("Tutorial")]
+        public Tutorial tutorial;
     }
 }
