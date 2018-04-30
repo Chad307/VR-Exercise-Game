@@ -32,6 +32,7 @@ namespace Game
         void OnEnable()
         {
             StartCoroutine(Spawn());
+            reference.score.StartGameScore();
         }
 
         // Update is called once per frame
@@ -41,10 +42,19 @@ namespace Game
             {
                 if (hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
                 {
-                    menuTransitionManager.GoToMain();
-                    gameObject.SetActive(false);
+                    Stop();
                 }
             }
+        }
+
+        public void Stop()
+        {
+            foreach (Move move in FindObjectsOfType<Move>())
+            {
+                move.StartDetonation(true);
+            }
+            menuTransitionManager.GoToMain();
+            gameObject.SetActive(false);
         }
 
         public IEnumerator Spawn()

@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using Menus;
+using Player;
 using Valve.VR.InteractionSystem;
 
 namespace Game
@@ -10,6 +11,7 @@ namespace Game
         [Header("Game")]
         public GameValues gameValues;
         public Spawner spawner;
+        public Score score;
 
         [Header("Environment")]
         public GameObject environmentGO;

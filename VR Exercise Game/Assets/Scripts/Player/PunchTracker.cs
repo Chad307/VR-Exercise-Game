@@ -26,15 +26,14 @@ namespace Player
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("projectile"))
+            if (other.CompareTag("projectile") && other.GetComponent<Move>().isPunchable)
             {
-                other.GetComponent<Move>().StartDetonation();
+                other.GetComponent<Move>().StartDetonation(false);
                 Rigidbody projectileRigidbody = other.GetComponent<Rigidbody>();
                 projectileRigidbody.velocity = hand.GetTrackedObjectVelocity() * forceMultipler;
                 projectileRigidbody.angularVelocity = hand.GetTrackedObjectAngularVelocity() * forceMultipler;
                 projectileRigidbody.maxAngularVelocity = projectileRigidbody
                     .angularVelocity.magnitude;
-                Debug.Log("Hit");
             }
         }
     }
