@@ -12,6 +12,7 @@ namespace Game
         public GameValues gameValues;
         public Spawner spawner;
         public Score score;
+        public Transform target;
 
         [Header("Environment")]
         public GameObject environmentGO;

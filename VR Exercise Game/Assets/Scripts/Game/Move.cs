@@ -15,9 +15,11 @@ public class Move : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+        reference = FindObjectOfType<ReferenceManager>();
+        target = reference.target;
         GetComponent<Rigidbody>().AddForce((target.position - transform.position) * speed, 
             ForceMode.Impulse);
-        reference = FindObjectOfType<ReferenceManager>();
+
 	}
 	
 	// Update is called once per frame
