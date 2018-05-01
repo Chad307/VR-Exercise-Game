@@ -32,7 +32,7 @@ namespace Menus
 
         public AudioSource audioSource;
 
-        private int stageIndex;
+        private int stageIndex = 0;
 
         public enum TutorialStage
         {
@@ -61,8 +61,7 @@ namespace Menus
         {
             reference = FindObjectOfType<ReferenceManager>();
             hands = reference.hands;
-            tutorialStage = TutorialStage.Menus;
-            stageIndex = 0;
+            SwitchStages(TutorialStage.Menus);
             ShowInStage();
         }
 
@@ -71,7 +70,8 @@ namespace Menus
         {
             foreach (Hand hand in hands)
             {
-                if (hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+                if (hand.controller != null && hand.controller
+                    .GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
                 {
                     stageIndex++;
                     if (stageIndex < currTexts.Count)
@@ -80,6 +80,7 @@ namespace Menus
                     }
                     else if (tutorialStage == TutorialStage.Gameplay)
                     {
+                        audioSource.Stop();
                         reference.spawner.gameObject.SetActive(true);
                         gameObject.SetActive(false);
                     }
@@ -110,6 +111,7 @@ namespace Menus
         public void ShowInStage()
         {
             tutorialText.text = currTexts[stageIndex];
+            audioSource.Stop();
             audioSource.PlayOneShot(currClips[stageIndex]);
 
             foreach (Hand hand in hands)
@@ -118,7 +120,7 @@ namespace Menus
 
                 if (currButtons[stageIndex] != Button.None)
                 {
-                    ControllerButtonHints.ShowButtonHint(hand, (EVRButtonId)currButtons[stageIndex]);
+                    ControllerButtonHints.ShowButtonHint(hand, (EVRButtonId)currButtons[stageIndex]);        
                 }
             }
         }

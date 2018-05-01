@@ -48,6 +48,11 @@ namespace Menus
         public Toggle colorBlindModeToggle;
 
         /// <summary>
+        /// Reference to Tutorial Toggle.
+        /// </summary>
+        public Toggle tutorialToggle;
+
+        /// <summary>
         /// Represents a color blind mode button GO and its associated ColorBlindMode.Mode.
         /// </summary>
         [Serializable]
@@ -104,6 +109,7 @@ namespace Menus
             }
 
             volumeSlider.value = settingsValues.masterVolume;
+            tutorialToggle.isOn = settingsValues.tutorialOn;
         }
 
         /// <summary>
@@ -172,6 +178,15 @@ namespace Menus
                     button.buttonGO.GetComponent<UIHover>().EndSelect();
                 }
             }
+        }
+
+        /// <summary>
+        /// Toggle whether tutorial mode will be played in future game sessions.
+        /// </summary>
+        /// <param name="isOn">State of whether tutorial is on.</param>
+        public void ToggleTutorial(bool isOn)
+        {
+            settingsValues.SetTutorialOn(isOn);
         }
     }
 }

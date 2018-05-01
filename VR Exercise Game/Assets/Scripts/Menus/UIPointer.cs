@@ -96,7 +96,7 @@ namespace Menus
         /// <summary>
         /// Find hand, initialize pointer and pointer values.
         /// </summary>
-        private void OnEnable()
+        private void Awake()
         {
             hand = gameObject.GetComponentInParent<Hand>();
 

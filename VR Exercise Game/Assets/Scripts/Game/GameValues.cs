@@ -41,6 +41,16 @@ namespace Game
         /// </summary>
         private GameObject environmentGO;
 
+        public enum Difficulty
+        {
+            Beginner,
+            Advanced
+        }
+
+        public Difficulty difficulty;
+
+        public Difficulty defaultDifficulty;
+
         /// <summary>
         /// Find references. Get PlayerPrefs value and set game settings.
         /// </summary>
@@ -70,6 +80,11 @@ namespace Game
             }
         }
 
+        public void SetDifficulty(Difficulty difficulty)
+        {
+            this.difficulty = difficulty;
+        }
+
         /// <summary>
         /// Set player prefs for gameplay values.
         /// </summary>
@@ -84,6 +99,7 @@ namespace Game
         public void SetPlayerPrefs()
         {
             PlayerPrefs.SetInt("environmentOn", Convert.ToInt32(environmentOn));
+            PlayerPrefs.SetInt("difficulty", (int)difficulty);
         }
 
         /// <summary>
@@ -93,6 +109,7 @@ namespace Game
         {
             environmentOn = Convert.ToBoolean(PlayerPrefs.GetInt("environmentOn", 
                 Convert.ToInt32(defaultEnvironmentOn)));
+            difficulty = (Difficulty)PlayerPrefs.GetInt("difficulty", (int)defaultDifficulty);
         }
 
         /// <summary>

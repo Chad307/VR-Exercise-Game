@@ -25,6 +25,7 @@ namespace Game
 
         [Header("Audio")]
         public AudioSource mainCanvasAudioSource;
+        public AudioSource tutorialCanvasAudioSource;
         public AudioClip menuSelect;
         public AudioClip menuBack;
         public AudioClip uiHover;
@@ -33,6 +34,7 @@ namespace Game
         public GameObject playerGO;
         public GameObject cameraGO;
         public Hand[] hands;
+        public UIPointer[] uiPointers;
 
         [Header("Menus and UI")]
         public MenuTransitionManager menuTransitionManager;

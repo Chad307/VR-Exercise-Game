@@ -6,7 +6,8 @@ using UnityEngine;
 public class Move : MonoBehaviour {
 
     public Transform target;
-    public float speed;
+    public float beginnerSpeed;
+    public float advancedSpeed;
     public float detonationTime;
     public GameObject detonationPrefab;
     public bool isPunchable;
@@ -17,9 +18,18 @@ public class Move : MonoBehaviour {
 	void Awake () {
         reference = FindObjectOfType<ReferenceManager>();
         target = reference.target;
-        GetComponent<Rigidbody>().AddForce((target.position - transform.position) * speed, 
-            ForceMode.Impulse);
 
+        switch (reference.gameValues.difficulty)
+        {
+            case GameValues.Difficulty.Beginner:
+                GetComponent<Rigidbody>().AddForce((target.position - transform.position) 
+                    * beginnerSpeed, ForceMode.Impulse);
+                break;
+            case GameValues.Difficulty.Advanced:
+                GetComponent<Rigidbody>().AddForce((target.position - transform.position)
+                    * advancedSpeed, ForceMode.Impulse);
+                break;
+        }
 	}
 	
 	// Update is called once per frame
@@ -31,7 +41,7 @@ public class Move : MonoBehaviour {
     public void StartDetonation(bool gameOver)
     {
         GameObject explosion = Instantiate(detonationPrefab, transform);
-        explosion.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //explosion.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         StartCoroutine(Detonate(gameOver));
     }
 

@@ -31,7 +31,6 @@ namespace Player
                 projectileRigidbody.angularVelocity = hand.GetTrackedObjectAngularVelocity() * forceMultipler;
                 projectileRigidbody.maxAngularVelocity = projectileRigidbody
                     .angularVelocity.magnitude;
-                Debug.Log(hand.GetTrackedObjectVelocity().sqrMagnitude);
             }
         }
     }

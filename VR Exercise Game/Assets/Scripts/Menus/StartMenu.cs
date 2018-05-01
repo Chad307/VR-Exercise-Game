@@ -13,6 +13,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Valve.VR.InteractionSystem;
 using Game;
 
 namespace Menus
@@ -87,8 +88,17 @@ namespace Menus
             environmentToggle.isOn = gameValues.environmentOn;
             environmentGO.SetActive(gameValues.environmentOn);
 
-            beginnerButton.GetComponent<UIHover>().EndSelect();
-            advancedButton.GetComponent<UIHover>().EndSelect();
+            switch (gameValues.difficulty)
+            {
+                case GameValues.Difficulty.Beginner:
+                    beginnerButton.GetComponent<UIHover>().Select();
+                    advancedButton.GetComponent<UIHover>().EndSelect();
+                    break;
+                case GameValues.Difficulty.Advanced:
+                    beginnerButton.GetComponent<UIHover>().EndSelect();
+                    advancedButton.GetComponent<UIHover>().Select();
+                    break;
+            }
         }
 
         /// <summary>
@@ -99,7 +109,7 @@ namespace Menus
             source.PlayOneShot(reference.menuSelect);
             beginnerButton.GetComponent<UIHover>().Select();
             advancedButton.GetComponent<UIHover>().EndSelect();
-            //TODO
+            gameValues.SetDifficulty(GameValues.Difficulty.Beginner);
         }
 
         /// <summary>
@@ -110,7 +120,7 @@ namespace Menus
             source.PlayOneShot(reference.menuSelect);
             advancedButton.GetComponent<UIHover>().Select();
             beginnerButton.GetComponent<UIHover>().EndSelect();
-            //TODO
+            gameValues.SetDifficulty(GameValues.Difficulty.Advanced);
         }
 
         /// <summary>
@@ -128,6 +138,7 @@ namespace Menus
         public void PressedPlay()
         {
             source.PlayOneShot(reference.menuSelect);
+            reference.tutorialCanvasAudioSource.Stop();
             PlayerPrefs.SetInt("environmentOn", Convert.ToInt32(environmentGO.activeSelf));
 
             if (reference.tutorial.gameObject.activeSelf)
@@ -138,6 +149,11 @@ namespace Menus
             else
             {
                 spawner.gameObject.SetActive(true);
+            }
+
+            foreach (UIPointer uiPointer in reference.uiPointers)
+            {
+                uiPointer.gameObject.SetActive(false);
             }
 
             gameObject.SetActive(false);

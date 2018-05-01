@@ -53,6 +53,11 @@ namespace Game
             {
                 move.StartDetonation(true);
             }
+            foreach (UIPointer uiPointer in reference.uiPointers)
+            {
+                uiPointer.gameObject.SetActive(true);
+            }
+
             menuTransitionManager.GoToMain();
             gameObject.SetActive(false);
         }
